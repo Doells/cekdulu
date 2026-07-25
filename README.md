@@ -320,7 +320,7 @@ Pengguna tetap perlu melakukan verifikasi melalui saluran resmi sebelum mengambi
 
 ## Lisensi
 
-[MIT License](LICENSE)
+[Irsyadulloh Ramadhan B.N License](LICENSE)
 
 ---
 
