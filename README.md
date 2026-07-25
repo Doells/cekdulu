@@ -312,7 +312,7 @@ Pengguna tetap perlu melakukan verifikasi melalui saluran resmi sebelum mengambi
 |-|-|
 | **Nama** | Irsyadulloh Ramadhan B.N |
 | **Institusi** | Universitas Narotama |
-| **Email** | [irsyadr181@gmail.com] |
+| **Email** | irsyadr181@gmail.com |
 | **GitHub** | [@Doells](https://github.com/Doells) |
 | **Hackathon** | Hackathon IndonesiaNext10 2026 |
 
