@@ -9,11 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@google/genai": "^2.13.0",
     "@supabase/ssr": "^0.12.3",
     "@supabase/supabase-js": "^2.110.8",
     "next": "16.2.11",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -27,6 +29,8 @@
   },
   "allowScripts": {
     "sharp@0.34.5": true,
-    "unrs-resolver@1.12.2": true
+    "unrs-resolver@1.12.2": true,
+    "@google/genai@2.13.0": true,
+    "protobufjs@7.6.5": true
   }
 }
