@@ -86,7 +86,7 @@ CekDulu tidak hanya memberikan peringatan bahwa sebuah pesan mencurigakan, tetap
 
 Pengguna dapat menempelkan pesan mencurigakan ke dalam formulir teks.
 
-#### 7.2.b Mode Screenshot *(baru)*
+#### 7.2.b Mode Screenshot
 
 Pengguna dapat mengunggah screenshot (JPEG, PNG, atau WebP, maksimal 5 MB). Sistem mengekstrak teks dalam gambar menggunakan AI Vision kemudian menganalisis indikasi penipuan.
 
