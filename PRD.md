@@ -124,7 +124,7 @@ Aplikasi menampilkan pengingat untuk:
 
 ## 8. Fitur di Luar MVP
 
-Fitur berikut tidak menjadi prioritas dalam pengerjaan delapan jam:
+Fitur berikut tidak menjadi prioritas dalam pengerjaan:
 
 - Analisis screenshot menggunakan AI Vision.
 - Pemeriksaan reputasi nomor telepon.
