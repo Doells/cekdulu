@@ -82,7 +82,19 @@ CekDulu tidak hanya memberikan peringatan bahwa sebuah pesan mencurigakan, tetap
 
 ### 7.2 Analisis Pesan
 
-Pengguna dapat menempelkan pesan mencurigakan ke dalam formulir.
+#### 7.2.a Mode Teks
+
+Pengguna dapat menempelkan pesan mencurigakan ke dalam formulir teks.
+
+#### 7.2.b Mode Screenshot *(baru)*
+
+Pengguna dapat mengunggah screenshot (JPEG, PNG, atau WebP, maksimal 5 MB). Sistem mengekstrak teks dalam gambar menggunakan AI Vision kemudian menganalisis indikasi penipuan.
+
+- Gambar tidak disimpan di database atau filesystem.
+- Hanya teks hasil ekstraksi yang disimpan ke kolom `input_text`.
+- Jika gambar tidak mengandung teks yang dapat dibaca, sistem menampilkan pesan error.
+
+#### Output Analisis (berlaku untuk kedua mode)
 
 Sistem akan menampilkan:
 
@@ -98,7 +110,6 @@ Sistem akan menampilkan:
 - Menyimpan hasil pemeriksaan ke database Supabase.
 - Menampilkan daftar riwayat pemeriksaan.
 - Membuka detail hasil pemeriksaan.
-- Menghapus riwayat milik pengguna.
 
 ### 7.4 Dashboard
 
@@ -126,7 +137,6 @@ Aplikasi menampilkan pengingat untuk:
 
 Fitur berikut tidak menjadi prioritas dalam pengerjaan:
 
-- Analisis screenshot menggunakan AI Vision.
 - Pemeriksaan reputasi nomor telepon.
 - Pemeriksaan domain atau tautan secara otomatis.
 - Forum laporan masyarakat.
@@ -140,17 +150,29 @@ Fitur tersebut dapat dikembangkan setelah MVP selesai.
 
 ## 9. User Flow
 
+**Mode Teks:**
 1. Pengguna membuka halaman CekDulu.
-2. Pengguna membaca manfaat aplikasi.
-3. Pengguna membuat akun atau login.
-4. Pengguna membuka halaman pemeriksaan.
-5. Pengguna menempelkan pesan mencurigakan.
-6. Pengguna menekan tombol **Analisis Sekarang**.
-7. Sistem mengirim pesan ke LLM API.
-8. AI mengembalikan hasil analisis terstruktur.
-9. Sistem menyimpan hasil ke Supabase.
-10. Pengguna melihat skor, indikator, penjelasan, dan rekomendasi.
-11. Pengguna dapat membuka hasil tersebut melalui halaman riwayat.
+2. Pengguna membuat akun atau login.
+3. Pengguna membuka halaman pemeriksaan dan memilih tab **Tempel Teks**.
+4. Pengguna menempelkan pesan mencurigakan.
+5. Pengguna menekan tombol **Periksa Sekarang**.
+6. Sistem mengirim teks ke Gemini API melalui Route Handler.
+7. AI mengembalikan hasil analisis terstruktur.
+8. Sistem memvalidasi respons dengan Zod dan menyimpan ke Supabase.
+9. Pengguna melihat skor, indikator, penjelasan, dan rekomendasi.
+10. Pengguna dapat membuka hasil tersebut melalui halaman riwayat.
+
+**Mode Screenshot:**
+1. Pengguna memilih tab **Unggah Screenshot**.
+2. Pengguna memilih file gambar (JPEG/PNG/WebP, ≤ 5 MB).
+3. Sistem menampilkan preview, nama file, dan ukuran file.
+4. Pengguna menekan tombol **Periksa Screenshot**.
+5. Sistem mengirim gambar sebagai multipart/form-data.
+6. Server memvalidasi file (MIME, ukuran, bukan kosong).
+7. AI mengekstrak teks dan menganalisis indikasi penipuan.
+8. Jika tidak ada teks, sistem mengembalikan error 422.
+9. Sistem menyimpan teks terekstrak dan hasil analisis ke Supabase.
+10. Pengguna melihat hasil analisis.
 
 ---
 
@@ -174,11 +196,13 @@ Fitur tersebut dapat dikembangkan setelah MVP selesai.
 ## 11. Kebutuhan Fungsional
 
 - Sistem harus memungkinkan pengguna mendaftar dan login.
-- Sistem harus menerima teks pesan dari pengguna.
-- Sistem harus mengirimkan pesan ke LLM API.
-- Sistem harus menerima respons AI dalam format terstruktur.
+- Sistem harus menerima teks pesan dari pengguna (mode teks).
+- Sistem harus menerima file gambar dari pengguna (mode screenshot: JPEG/PNG/WebP, ≤ 5 MB).
+- Sistem harus memvalidasi MIME type dan ukuran file di client dan server.
+- Sistem harus mengirimkan input ke Gemini API melalui server.
+- Sistem harus menerima respons AI dalam format terstruktur dan memvalidasi dengan Zod.
 - Sistem harus menghitung dan menampilkan tingkat risiko.
-- Sistem harus menyimpan hasil analisis ke Supabase.
+- Sistem harus menyimpan hasil analisis ke Supabase (gambar tidak disimpan).
 - Sistem harus membatasi data berdasarkan pengguna.
 - Sistem harus dapat digunakan di PC dan smartphone.
 - Sistem harus menampilkan pesan kesalahan ketika analisis gagal.
@@ -236,8 +260,9 @@ MVP dinyatakan berhasil apabila:
 
 - Pengguna dapat membuat akun.
 - Pengguna dapat login dan logout.
-- Pengguna dapat memasukkan pesan mencurigakan.
-- AI dapat menghasilkan analisis terstruktur.
+- Pengguna dapat memasukkan pesan mencurigakan (mode teks).
+- Pengguna dapat mengunggah screenshot untuk dianalisis (mode gambar).
+- AI dapat menghasilkan analisis terstruktur untuk kedua mode.
 - Hasil analisis dapat disimpan di Supabase.
 - Pengguna dapat melihat riwayat pemeriksaan.
 - Data antar pengguna tidak dapat saling diakses.
@@ -279,10 +304,11 @@ Pengguna tetap perlu melakukan verifikasi melalui saluran resmi dan tidak boleh 
 
 Setelah MVP, CekDulu dapat dikembangkan dengan:
 
-- Analisis screenshot.
-- Deteksi tautan mencurigakan.
-- Basis data modus penipuan.
+- Deteksi tautan/domain mencurigakan.
+- Basis data modus penipuan komunitas.
+- Pemeriksaan reputasi nomor telepon.
 - Pelaporan anonim dari masyarakat.
 - Peta tren penipuan berdasarkan kategori.
-- Integrasi kanal pelaporan resmi.
+- Integrasi kanal pelaporan resmi (IASC).
 - Ekstensi browser atau aplikasi mobile.
+
