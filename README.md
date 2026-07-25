@@ -310,11 +310,11 @@ Pengguna tetap perlu melakukan verifikasi melalui saluran resmi sebelum mengambi
 
 | | |
 |-|-|
-| **Nama** | [Nama Anda] |
-| **Institusi** | [Universitas / Organisasi Anda] |
-| **Email** | [email@example.com] |
-| **GitHub** | [@username](https://github.com/username) |
-| **Hackathon** | [Nama Hackathon & Tahun] |
+| **Nama** | Irsyadulloh Ramadhan B.N |
+| **Institusi** | Universitas Narotama |
+| **Email** | [irsyadr181@gmail.com] |
+| **GitHub** | [@Doells](https://github.com/Doells) |
+| **Hackathon** | Hackathon IndonesiaNext10 2026 |
 
 ---
 
